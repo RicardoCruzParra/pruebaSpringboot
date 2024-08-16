@@ -44,12 +44,14 @@ public class UsuarioServicioTest
         // Mocks
         when(usuarioRepositorio.findByCorreo(anyString())).thenReturn(Optional.empty());
         when(jwtTokenProvider.crearToken(anyString())).thenReturn("mocked-token");
+        when(usuarioRepositorio.save(any(Usuario.class))).thenReturn(usuario);
 
         // Ejecución
         Usuario usuarioCreado = usuarioServicio.crearUsuario(usuario);
 
         // Verificaciones
-        assertNotNull(usuarioCreado.getId());
+        assertNotNull(usuario, "El usuario creado no debería ser null");
+        assertEquals(usuario.getId(), usuarioCreado.getId(), "El ID del usuario debería coincidir");
         assertEquals("mocked-token", usuarioCreado.getToken());
         assertTrue(usuarioCreado.isEstaActivo());
         verify(usuarioRepositorio, times(1)).save(usuario);
