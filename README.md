@@ -7,7 +7,7 @@ Este proyecto es una API RESTful desarrollada en Java con Spring Boot, diseñada
 
 Asegúrate de tener instalados:
 
-Java 8+
+Java 17
 Maven
 IntelliJ IDEA o tu IDE favorito
 🚀 Configuración del Proyecto

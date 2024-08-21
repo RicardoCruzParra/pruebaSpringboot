@@ -1,5 +1,6 @@
 package com.evaluacion.usuario.seguridad;
 
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
@@ -30,16 +31,16 @@ public class JwtTokenProvider
                 .compact();
     }
 
-    public String obtenerCorreo(String token)
+    public Claims obtenerCorreo(String token)
     {
-        return Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody().getSubject();
+        return Jwts.parser().setSigningKey(token).build().parseSignedClaims(token).getBody();
     }
 
     public boolean validarToken(String token)
     {
         try
         {
-            Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token);
+            Jwts.parser().setSigningKey(token).build().parseSignedClaims(token).getBody();
             return true;
         }
         catch (Exception e)
@@ -47,6 +48,7 @@ public class JwtTokenProvider
             return false;
         }
     }
+
 
     public String resolverToken(HttpServletRequest req)
     {
