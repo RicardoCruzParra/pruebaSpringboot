@@ -78,43 +78,69 @@ Verifica los resultados de las pruebas en la consola para identificar cualquier 
 
 📋 Endpoints Principales
 
-Registro de Usuario
-URL: POST /api/usuarios/registro
-Formato de Solicitud:
-json
-Copiar código
+Registro de Usuario Caso Exitoso
+URL: POST /api/creacionUsuarios/registro
+Formato de Solicitud: json
+
 ```
 {
-"nombre": "Juan Rodriguez",
-"correo": "juan@rodriguez.org",
-"contraseña": "P@ssw0rd",
-"telefonos": [
-{
-"numero": "1234567",
-"codigoCiudad": "1",
-"codigoPais": "57"
+    "nombre": "Juan Rodriguez",
+    "correo": "juan@rodriguez.org",
+    "contraseña": "P@ssw0rd",
+    "telefonos": [
+        {
+            "numero": "1234567",
+            "codigoCiudad": "1",
+            "codigoPais": "57"
+        }
+    ]
 }
-]
-}
-Formato de Respuesta:
-json
-Copiar código
+```
+
+Formato de Respuesta: json
+```
 {
-"id": "4fd15c60-7e5d-42e3-9733-467e43adfcbd",
-"nombre": "Juan Rodriguez",
-"correo": "juan@rodriguez.org",
-"telefonos": [
-{
-"numero": "1234567",
-"codigoCiudad": "1",
-"codigoPais": "57"
+    "id": "4fd15c60-7e5d-42e3-9733-467e43adfcbd",
+    "nombre": "Juan Rodriguez",
+    "correo": "juan@rodriguez.org",
+    "telefonos": [
+        {
+            "numero": "1234567",
+            "codigoCiudad": "1",
+            "codigoPais": "57"
+        }
+    ],
+    "creado": "2024-08-14T12:45:00",
+    "modificado": "2024-08-14T12:45:00",
+    "ultimoIngreso": "2024-08-14T12:45:00",
+    "token": "eyJhbGciOiJIUzI1NiIsInR...",
+    "estaActivo": true
 }
-],
-"creado": "2024-08-14T12:45:00",
-"modificado": "2024-08-14T12:45:00",
-"ultimoIngreso": "2024-08-14T12:45:00",
-"token": "eyJhbGciOiJIUzI1NiIsInR...",
-"estaActivo": true
+```
+
+Registro de Usuario Caso Existente
+URL: POST /api/creacionUsuarios/registro
+Formato de Solicitud: json
+
+```
+{
+    "nombre": "Juan Rodriguez",
+    "correo": "juan@rodriguez.org",
+    "contraseña": "hunter2",
+    "telefonos": [
+        {
+            "numero": "1234567",
+            "codigoCiudad": "1",
+            "codigoPais": "57"
+        }
+    ]
+}
+```
+
+Formato de Respuesta: json
+```
+{
+    "mensaje": "El correo ya registrado"
 }
 ```
 📖 Swagger API Documentation
