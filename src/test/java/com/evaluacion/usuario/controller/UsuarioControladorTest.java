@@ -80,5 +80,24 @@ public class UsuarioControladorTest
                 .andExpect(status().isBadRequest())
                 .andExpect(jsonPath("$.mensaje").value("El correo ya registrado"));
     }
+
+    @Test
+    void testObtenerUsuarioPorId() throws Exception {
+        UUID id = UUID.randomUUID();
+        Usuario usuario = new Usuario();
+        usuario.setId(id);
+        usuario.setNombre("Juan Rodriguez");
+        usuario.setCorreo("juan@rodriguez.org");
+
+        when(usuarioServicio.obtenerUsuarioPorId(id)).thenReturn(usuario);
+
+        mockMvc.perform(get("/api/usuarios/{id}", id)
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id").value(id.toString()))
+                .andExpect(jsonPath("$.nombre").value("Juan Rodriguez"));
+
+        verify(usuarioServicio, times(1)).obtenerUsuarioPorId(id);
+    }
 }
 
